@@ -9,43 +9,63 @@ class Mapper(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Yandex Maps API')
-        uic.loadUi('Maps-API-Ydx\Interface.ui', self)
+        uic.loadUi('Interface.ui', self)
         self.scaler = float()
+        self.layer = 'skl'
+        self.place = str()
+        self.point = list()
+        self.Hybride.value = 'sat,skl'
+        self.Hybride.toggled.connect(self.changeType)
+        self.Scheme.value = 'skl'
+        self.Scheme.toggled.connect(self.changeType)
+        self.Satellite.value = 'sat'
+        self.Satellite.toggled.connect(self.changeType)
         self.getResult.clicked.connect(self.decorator)
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
-        print(event.key())
         koef = 0.25
-        if event.key() == Qt.Key_PageUp and self.scaler < 90 - koef:
+        print(event.key())
+        if event.key() == 56 and self.scaler < 90 - koef:
             self.scaler += koef
-            print(self.scaler)
-            self.mapIt(getScale=False, getCenter=False)
-        elif event.key() == Qt.Key_PageDown and self.scaler > koef:
+            self.mapIt(getNew=False)
+        elif event.key() == 50 and self.scaler > koef:
             self.scaler -= koef
-            print(self.scaler)
-            self.mapIt(getScale=False, getCenter=False)
-        elif event.key() == Qt.Key_W:
+            self.mapIt(getNew=False)
+        elif event.key() == 1062:
+            self.mapIt(getNew=False)
             self.sCord += koef
-            self.mapIt(getScale=False, getCenter=False)
-        elif event.key() == Qt.Key_S:
+            print(self.sCord)
+        elif event.key() == 1067:
+            self.mapIt(getNew=False)
             self.sCord -= koef
-            self.mapIt(getScale=False, getCenter=False)
-        elif event.key() == Qt.Key_D:
+        elif event.key() == 1042:
+            self.mapIt(getNew=False)
             self.fCord += koef
-            self.mapIt(getScale=False, getCenter=False)
-        elif event.key() == Qt.Key_A:
+        elif event.key() == 1060:
+            self.mapIt(getNew=False)
             self.fCord -= koef
-            self.mapIt(getScale=False, getCenter=False)
+        
 
     def decorator(self):
-        self.mapIt(getScale=True, getCenter=True)
+        self.mapIt(getNew=True)
+
+    def changeType(self):
+        self.layer = self.sender().value
+        self.mapIt(getNew=False)
                 
-    def mapIt(self, getScale=True, getCenter=True):
-        if getCenter or not self.sCord:
-            self.fCord, self.sCord = float(self.firstCoord.text()), float(self.secondCoord.text())
-        if getScale or not self.scaler:
-            self.scaler = float(self.scale.text())
-        get_image((self.fCord, self.sCord), (self.scaler, self.scaler))
+    def mapIt(self, getNew=True):
+        if getNew and self.getPlace.toPlainText() == 'Введите название объекта' or self.getPlace.toPlainText() == '':
+            self.point = list()
+            if getNew or not self.sCord:
+                self.fCord, self.sCord = float(self.firstCoord.text()), float(self.secondCoord.text())
+            if getNew or not self.scaler:
+                self.scaler = float(self.scale.text())
+        elif getNew:
+            info = get_coords(self.getPlace.toPlainText())
+            self.fCord, self.sCord = info['coords']
+            self.point = list(info['coords'])
+            self.scaler = max(info['del_dolg'], info['del_shir'])
+        get_image((self.fCord, self.sCord), (self.scaler, self.scaler), self.layer, self.point)
         map = QtGui.QPixmap('map.png')
         self.map.setPixmap(map)
 
