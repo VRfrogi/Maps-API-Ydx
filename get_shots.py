@@ -27,9 +27,13 @@ def get_coords(req):
         print("Http статус:", response.status_code, "(", response.reason, ")")
         sys.exit(1)
 
-def get_image(top_coordinates: tuple, scale):
+def get_image(top_coordinates: tuple, scale, layer='skl', pt:list=None):
     dolg, shir = top_coordinates
-    map_request = f"http://static-maps.yandex.ru/1.x/?ll={dolg},{shir}&spn={scale[0]},{scale[1]}&l=sat,skl"
+    if len(pt) == 0:
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={dolg},{shir}&spn={scale[0]},{scale[1]}&l={layer}"
+    else:
+        stroked_point = ','.join(map(str, pt))
+        map_request = f"http://static-maps.yandex.ru/1.x/?ll={dolg},{shir}&spn={scale[0]},{scale[1]}&l={layer}&pt={stroked_point},pm2rdm"
     response = requests.get(map_request)
     map_file = "map.png"
     with open(map_file, "wb") as file:
