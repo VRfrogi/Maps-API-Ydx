@@ -23,7 +23,7 @@ class Mapper(QMainWindow):
         self.getResult.clicked.connect(self.decorator)
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
-        koef = 0.25
+        koef = 0.25 * self.scaler
         print(event.key())
         if event.key() == 56 and self.scaler < 90 - koef:
             self.scaler += koef

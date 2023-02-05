@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>1080</width>
-    <height>397</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Yandex Maps API</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="map">
@@ -27,65 +27,95 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="getResult">
+   <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>270</y>
-      <width>309</width>
-      <height>33</height>
+      <x>740</x>
+      <y>10</y>
+      <width>311</width>
+      <height>381</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Show</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="formLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>50</y>
-      <width>309</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="2" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>N/S</string>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Координаты:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>N/S</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="firstCoord"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>E/W</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="secondCoord"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Масштаб</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="scale"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="getPlace">
+       <property name="plainText">
+        <string>Введите название объекта</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="firstCoord"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_2">
+     <item>
+      <widget class="QPushButton" name="getResult">
        <property name="text">
-        <string>E/W</string>
+        <string>Show</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="secondCoord"/>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Масштаб</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="scale"/>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Координаты:</string>
-       </property>
-      </widget>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="Scheme">
+         <property name="text">
+          <string>Схема</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="Satellite">
+         <property name="text">
+          <string>Спутник</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="Hybride">
+         <property name="text">
+          <string>Гибрид</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
