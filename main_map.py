@@ -25,10 +25,10 @@ class Mapper(QMainWindow):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         koef = 0.25 * self.scaler
         print(event.key())
-        if event.key() == 57 and self.scaler < 90 - koef:
+        if event.key() == Qt.Key.Key_PageUp and self.scaler < 90 - koef:
             self.scaler += koef
             self.mapIt(getNew=False)
-        elif event.key() == 51 and self.scaler > koef:
+        elif event.key() == Qt.Key.Key_PageDown and self.scaler > koef:
             self.scaler -= koef
             self.mapIt(getNew=False)
         elif event.key() == 1062:
