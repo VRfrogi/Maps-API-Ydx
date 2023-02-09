@@ -25,25 +25,24 @@ class Mapper(QMainWindow):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         koef = 0.25 * self.scaler
         print(event.key())
-        if event.key() == 56 and self.scaler < 90 - koef:
+        if event.key() == 57 and self.scaler < 90 - koef:
             self.scaler += koef
             self.mapIt(getNew=False)
-        elif event.key() == 50 and self.scaler > koef:
+        elif event.key() == 51 and self.scaler > koef:
             self.scaler -= koef
             self.mapIt(getNew=False)
         elif event.key() == 1062:
-            self.mapIt(getNew=False)
             self.sCord += koef
-            print(self.sCord)
+            self.mapIt(getNew=False)
         elif event.key() == 1067:
-            self.mapIt(getNew=False)
             self.sCord -= koef
+            self.mapIt(getNew=False)
         elif event.key() == 1042:
-            self.mapIt(getNew=False)
             self.fCord += koef
-        elif event.key() == 1060:
             self.mapIt(getNew=False)
+        elif event.key() == 1060:
             self.fCord -= koef
+            self.mapIt(getNew=False)
         
 
     def decorator(self):
